@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Go WebAssembly 示例</title>
+</head>
+<body>
+    <h1>Go WebAssembly 示例</h1>
+    <script>
+        // 加载 WebAssembly 模块
+        const go = new Go();
+        WebAssembly.instantiateStreaming(fetch('main.wasm'), go.importObject).then((result) => {
+            go.run(result.instance);
+        });
+
+        // 调用 WebAssembly 导出的函数
+        const result = add(5, 3);
+        console.log('5 + 3 =', result);
+    </script>
+</body>
+</html>
